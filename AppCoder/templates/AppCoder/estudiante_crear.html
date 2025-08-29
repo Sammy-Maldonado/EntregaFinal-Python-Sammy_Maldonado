@@ -1,0 +1,15 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+    Crear Estudiante
+{% endblock %}
+
+{% block content_title %} Crear Estudiante {% endblock content_title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Crear</button>
+    </form>
+{% endblock %}

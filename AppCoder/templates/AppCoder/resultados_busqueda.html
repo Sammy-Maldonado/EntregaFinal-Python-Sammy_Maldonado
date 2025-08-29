@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Búsqueda</title>
+</head>
+<body>
+    <h1>Resultados de Búsqueda</h1>
+
+    {% if resultados %}
+        <ul>
+            {% for curso in resultados %}
+                <li>{{ curso.nombre }} - Camada: {{ curso.camada }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron resultados para la camada especificada.</p>
+    {% endif %}
+
+    <a href="{% url 'AppCoder:buscarCurso' %}">Nueva Búsqueda</a>
+</body>
+</html>

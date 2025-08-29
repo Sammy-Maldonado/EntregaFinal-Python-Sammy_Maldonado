@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario - Agregar Curso</title>
+</head>
+<body>
+    <h1>Agregar Curso</h1>
+
+    <form action="{% url 'AppCoder:cursoFormulario' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

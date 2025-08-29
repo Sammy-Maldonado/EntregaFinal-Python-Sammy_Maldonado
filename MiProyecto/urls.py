@@ -17,7 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+# from AppBlog import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('Main.urls')),
     path('appcoder/', include('AppCoder.urls')),
+    path('blog/', include('AppBlog.urls')),
+    path('tienda/', include('AppTienda.urls')),
+    # path('', views.index, name='index'),
 ]

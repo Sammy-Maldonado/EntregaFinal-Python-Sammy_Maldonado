@@ -1,0 +1,41 @@
+{% extends "Main/base.html" %}
+
+{% block title %}Inicio - Blog{% endblock %}
+
+{% block content_title %} Bienvenidos a Academia Integra {% endblock content_title %}
+
+{% block content %}
+<div class="container my-5">
+  <h4 class="d-flex justify-content-center align-items-center my-4">Publicaciones recientes...</h4>
+  {% if posts %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for post in posts %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.titulo }}</h5>
+            <p class="card-text text-muted">
+              {{ post.contenido|truncatewords:20 }}
+            </p>
+            <a href="{% url 'AppBlog:post_detail' post.id %}" class="btn btn-outline-secondary btn-sm">
+              Leer más
+            </a>
+          </div>
+          <div class="card-footer text-muted small">
+            Publicado el {{ post.fecha_publicacion|date:"d M Y" }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-muted">Todavía no hay publicaciones en el blog.</p>
+  {% endif %}
+
+  <div class="d-flex justify-content-center mt-5">
+    <a href="{% url 'AppBlog:post_list' %}" class="btn btn-outline-secondary btn-sm">
+      Ver más publicaciones
+    </a>
+  </div>
+</div>
+{% endblock %}

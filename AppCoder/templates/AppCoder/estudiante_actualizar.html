@@ -1,0 +1,15 @@
+{% extends 'AppCoder/padre.html' %}
+
+{% block title %}
+    Actualizar Estudiante
+{% endblock %}
+
+{% block content_title %} Actualizar Estudiante {% endblock content_title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Cambios</button>
+    </form>
+{% endblock %}

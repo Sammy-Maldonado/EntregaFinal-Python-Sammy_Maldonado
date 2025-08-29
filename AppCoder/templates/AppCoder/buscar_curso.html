@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Curso</title>
+</head>
+<body>
+    <h1>Buscar Curso por Camada</h1>
+
+    <form method="get" action="{% url 'AppCoder:buscarCurso' %}">
+        {{ form.as_p }}
+        <button type="submit">Buscar</button>
+    </form>
+</body>
+</html>
