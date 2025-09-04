@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9$@q5fzx*s&b0rmizpx!$1g66^hg=x9dbr^&ug(k1ghg%rv&cf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,6 +83,16 @@ DATABASES = {
     }
 }
 
+# ⬇️ Importar dj_database_url y actualizar la base de datos si estás en Heroku
+import dj_database_url
+
+# Sobrescribir si hay variable DATABASE_URL (en Heroku siempre está definida)
+db_from_env = dj_database_url.config(
+    default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+    conn_max_age=600
+)
+
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -124,3 +134,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
