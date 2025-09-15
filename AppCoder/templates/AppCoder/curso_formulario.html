@@ -1,16 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Formulario - Agregar Curso</title>
-</head>
-<body>
-    <h1>Agregar Curso</h1>
+{% extends 'AppCoder/padre.html' %}
 
-    <form action="{% url 'AppCoder:cursoFormulario' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar</button>
-    </form>
-</body>
-</html>
+{% block title %}Agregar Curso{% endblock %}
+
+{% block content_title %}Agregar Curso{% endblock content_title %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Nuevo curso</h5>
+
+          <form action="{% url 'AppCoder:cursoFormulario' %}" method="post" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between mt-3">
+              <a href="{% url 'AppCoder:cursos' %}" class="btn btn-outline-secondary">Volver a cursos</a>
+              <button type="submit" class="btn btn-primary">Guardar curso</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

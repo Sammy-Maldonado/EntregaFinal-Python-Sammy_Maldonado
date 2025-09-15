@@ -1,0 +1,29 @@
+{% extends "Main/base.html" %}
+
+{% block content_title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <h4>Iniciar Sesión</h4>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+          </form>
+
+          <div class="text-center mt-3">
+            <p class="mb-1">¿No tienes una cuenta?</p>
+            <a href="{% url 'Main:crear_usuario' %}" class="btn btn-outline-success">Crear una cuenta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,4 +1,6 @@
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Post
@@ -45,23 +47,29 @@ def post_create(request):
         form = PostForm()
     return render(request, 'AppBlog/post_create.html', context={'form': form})
 
-class PostCreateView(CreateView):       #Recrea a post_create
+class PostCreateView(LoginRequiredMixin, CreateView):       #Recrea a post_create
     model = Post
     form_class = PostForm
     success_url = reverse_lazy('AppBlog:post_list')
+    login_url = reverse_lazy('Main:login')
     
     def form_valid(self, form):
-        if self.request.user.is_authenticated:
-            form.instance.autor = self.request.user
-        else:
-            form.add_error(None, "Debes estar logueado para crear una publicacion.")
-            return self.form_invalid(form)
+        form.instance.autor = self.request.user
         return super().form_valid(form)
 
-class PostUpdateView(UpdateView):
+    def handle_no_permission(self):
+        messages.warning(self.request, "Debes estar logueado para crear una publicación.")
+        return super().handle_no_permission()
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
     success_url = reverse_lazy('AppBlog:post_list')
+    login_url = reverse_lazy('Main:login')
+
+    def handle_no_permission(self):
+        messages.warning(self.request, "Debes estar logueado para editar una publicación.")
+        return super().handle_no_permission()
 
 class PostDetailView(DetailView):
     model = Post

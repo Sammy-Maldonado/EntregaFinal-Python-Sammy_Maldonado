@@ -5,13 +5,23 @@ from .forms import CursoFormulario, BusquedaCursoFormulario, EstudianteForm
 from .models import Estudiante, Profesor, Curso, Entregable
 
 
-
-
 def inicio(request):
     return render(request, "AppCoder/inicio.html")
 
-def cursos(request):
-    return render(request, "AppCoder/cursos.html")
+class CursoListView(ListView):
+    model = Curso
+    template_name = 'AppCoder/cursos.html'
+    context_object_name = 'cursos'
+    
+class CursoDetailView(DetailView):
+    model = Curso
+    template_name = 'AppCoder/curso_detail.html'
+    context_object_name = 'curso'
+
+class CursoDeleteView(DeleteView):
+    model = Curso
+    template_name = 'AppCoder/curso_confirm_delete.html'
+    success_url = reverse_lazy('AppCoder:cursos')
 
 def profesores(request):
     return render(request, "AppCoder/profesores.html")

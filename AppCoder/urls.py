@@ -5,7 +5,9 @@ app_name = 'AppCoder'
 
 urlpatterns = [
     path('', views.inicio, name="inicio"),
-    path('cursos/', views.cursos, name="cursos"),
+    path('cursos/', views.CursoListView.as_view(), name="cursos"),
+    path('cursos/<int:pk>/', views.CursoDetailView.as_view(), name='curso_detail'),
+    path('cursos/<int:pk>/eliminar/', views.CursoDeleteView.as_view(), name='curso_delete'),
     path('profesores/', views.profesores, name="profesores"),
     path('entregables/', views.entregables, name="entregables"),
     path('estudiante/crear/', views.EstudianteCreateView.as_view(), name='estudiante_crear'),

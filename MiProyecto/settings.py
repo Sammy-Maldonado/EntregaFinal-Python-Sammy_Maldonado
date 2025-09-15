@@ -138,3 +138,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+#Auth
+LOGIN_URL = 'Main:login'  # Ruta para redirigir usuarios no autenticados
+LOGIN_REDIRECT_URL = 'Main:index'  # Ruta después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'Main:index'  # Ruta después de cerrar sesión

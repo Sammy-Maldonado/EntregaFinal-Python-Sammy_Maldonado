@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Buscar Curso</title>
-</head>
-<body>
-    <h1>Buscar Curso por Camada</h1>
+{% extends 'AppCoder/padre.html' %}
 
-    <form method="get" action="{% url 'AppCoder:buscarCurso' %}">
-        {{ form.as_p }}
-        <button type="submit">Buscar</button>
-    </form>
-</body>
-</html>
+{% block title %}Buscar Curso{% endblock %}
+
+{% block content_title %}Buscar Curso por Camada{% endblock content_title %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <form method="get" action="{% url 'AppCoder:buscarCurso' %}" class="d-grid gap-2">
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">Buscar</button>
+              <a href="{% url 'AppCoder:cursos' %}" class="btn btn-outline-secondary">Volver a cursos</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

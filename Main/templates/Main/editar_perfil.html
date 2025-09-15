@@ -9,12 +9,73 @@
 {% endblock content_title %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Editar datos</h5>
+      <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-            {{ avatar_form.as_table }}
-        </table>
-        <button type="submit">Guardar cambios</button>
-    </form>
+        <!-- Renderiza solo los campos que queremos mostrar -->
+        <div class="mb-3">
+          {{ form.email.label_tag }} {{ form.email }}
+          {{ form.email.errors }}
+        </div>
+        <div class="mb-3">
+          {{ form.first_name.label_tag }} {{ form.first_name }}
+          {{ form.first_name.errors }}
+        </div>
+        <div class="mb-3">
+          {{ form.last_name.label_tag }} {{ form.last_name }}
+          {{ form.last_name.errors }}
+        </div>
+
+        {{ avatar_form.as_p }}
+
+        <div class="mt-2">
+          <a href="#" id="toggle-password" class="btn btn-link">Cambiar contraseña</a>
+          <button type="submit" name="save_profile" class="btn btn-primary">Guardar perfil</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <div id="password-section" style="display:none;">
+        <h5>Cambiar contraseña</h5>
+        <form method="post">
+          {% csrf_token %}
+          {{ password_form.non_field_errors }}
+          <div class="mb-3">
+            {{ password_form.old_password.label_tag }} {{ password_form.old_password }}
+            {{ password_form.old_password.errors }}
+          </div>
+          <div class="mb-3">
+            {{ password_form.new_password1.label_tag }} {{ password_form.new_password1 }}
+            {{ password_form.new_password1.errors }}
+          </div>
+          <div class="mb-3">
+            {{ password_form.new_password2.label_tag }} {{ password_form.new_password2 }}
+            {{ password_form.new_password2.errors }}
+          </div>
+          <div class="mt-2">
+            <button type="submit" name="change_password" class="btn btn-warning">Cambiar contraseña</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle para mostrar/ocultar el bloque de cambio de contraseña
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('toggle-password');
+      const section = document.getElementById('password-section');
+      if (btn && section) {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          section.style.display = (section.style.display === 'none') ? 'block' : 'none';
+          // opcional: desplazar la vista al bloque
+          if (section.style.display === 'block') section.scrollIntoView({behavior: 'smooth'});
+        });
+      }
+    });
+  </script>
 {% endblock content %}
